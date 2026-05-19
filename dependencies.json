@@ -1,0 +1,14 @@
+[
+    {"type": "git", "url": "https://gitee.com/planet21/tinyGFX", "dest": "3rd/tinyGFX", "ref": "", "config_args": ""},
+    {"type": "git", "url": "https://github.com/Immediate-Mode-UI/Nuklear", "dest": "3rd/nuklear", "ref": "4.13.2", "config_args": ""},
+    {"type": "git", "url": "https://github.com/microsoft/mimalloc", "dest": "3rd/mimalloc", "ref": "v2.1.2", "config_args": "-D MI_BUILD_OBJECT:BOOL=OFF -D MI_BUILD_SHARED:BOOL=OFF -D MI_BUILD_TESTS:BOOL=OFF"},
+    {"type": "git", "url": "https://github.com/mobius3/tweeny", "dest": "3rd/tweeny", "ref": "v3.2.1", "config_args": ""},
+    {"type": "git", "url": "https://github.com/nothings/stb", "dest": "3rd/stb", "ref": "master", "config_args": ""},
+    {"type": "git", "url": "https://github.com/taskflow/taskflow", "dest": "3rd/taskflow", "ref": "v3.7.0", "config_args": ""},
+    {"type": "git", "url": "https://github.com/syoyo/tinygltf", "dest": "3rd/tinygltf", "ref": "v2.9.7", "config_args": ""},
+    {"type": "git", "url": "https://github.com/DaveGamble/cJSON", "dest": "3rd/cJSON", "ref": "v1.7.15", "config_args": "-D BUILD_SHARED_LIBS:BOOL=OFF -D CJSON_BUILD_SHARED_LIBS:BOOL=OFF -D ENABLE_CJSON_TEST:BOOL=OFF"},
+    {"type": "git", "url": "https://gitlab.com/libeigen/eigen", "dest": "3rd/eigen", "ref": "3.4.0", "config_args": ""},
+    {"type": "git", "url": "https://github.com/recastnavigation/recastnavigation", "dest": "3rd/recastnavigation", "ref": "v1.6.0", "config_args": "-D RECASTNAVIGATION_TESTS:BOOL=OFF -D RECASTNAVIGATION_EXAMPLES:BOOL=OFF -D RECASTNAVIGATION_DEMO:BOOL=OFF"},
+    {"type": "git", "url": "https://github.com/Cyan4973/xxHash", "dest": "3rd/xxHash", "ref": "v0.8.3", "config_args": ""},
+    {"type": "http", "url": "https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-win.zip", "dest": "3rd/ninja", "ref": "", "config_args": ""}
+]
