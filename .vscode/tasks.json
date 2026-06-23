@@ -16,29 +16,76 @@
         {
             "label": "_internal_create_venv",
             "type": "shell",
-            "command": "if not exist build\\py_temp\\Scripts\\python.exe python -m venv build/py_temp",
             "hide": true,
             "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": {
-                    "executable": "cmd.exe",
-                    "args": [
-                        "/c"
-                    ]
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "cmd",
+                "args": [
+                    "/c",
+                    "if not exist build\\py_temp\\Scripts\\python.exe python -m venv build/py_temp"
+                ]
+            },
+            "linux": {
+                "command": "python",
+                "args": [
+                    "-m",
+                    "venv",
+                    "build/py_temp"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}"
                 }
             }
         },
+        {
+            "label": "_internal_create_dir",
+            "type": "shell",
+            "hide": true,
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "cmd",
+                "args": [
+                    "/c",
+                    "mkdir source 2>nul & mkdir publish 2>nul"
+                ]
+            },
+            "linux": {
+                "command": "mkdir",
+                "args": [
+                    "-p",
+                    "source",
+                    "publish"
+                ]
+            }
+        },
+        // Setup Main Entry
         {
             "label": "Setup",
             "type": "shell",
             "command": "build\\py_temp\\Scripts\\python.exe .vscode\\dependency.py",
             "dependsOn": [
-                "_internal_create_venv"
+                "_internal_create_venv",
+                "_internal_create_dir"
             ],
             "dependsOrder": "sequence",
             "options": {
                 "cwd": "${workspaceFolder}"
-            }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "clear": true
+            },
         },
         {
             "label": "_internal_config_proj_msvc",
@@ -105,7 +152,18 @@
                 "dependsOn": [
                     "_internal_config_proj_ninja"
                 ]
-            }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "clear": true
+            },
         },
         // Build Main Entry
         {
