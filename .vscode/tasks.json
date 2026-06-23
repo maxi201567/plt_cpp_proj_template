@@ -1,5 +1,17 @@
 {
     "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "build_config",
+            "type": "pickString",
+            "description": "Select Build Config",
+            "options": [
+                "Debug",
+                "Release"
+            ],
+            "default": "Debug"
+        }
+    ],
     "tasks": [
         {
             "label": "_internal_create_venv",
@@ -79,6 +91,7 @@
             },
             "problemMatcher": []
         },
+        // Config Main Entry
         {
             "label": "Config Project",
             "type": "shell",
@@ -94,15 +107,16 @@
                 ]
             }
         },
+        // Build Main Entry
         {
-            "label": "Build Project (Debug)",
+            "label": "Build Project",
             "type": "shell",
             "command": "cmake",
             "args": [
                 "--build",
                 "build",
                 "--config",
-                "Debug",
+                "${input:build_config}",
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -122,20 +136,26 @@
                 "$msCompile"
             ]
         },
+        // Build 3rd Main Entry
         {
-            "label": "Build Project (Release)",
+            "label": "Build 3rd Party",
             "type": "shell",
             "command": "cmake",
             "args": [
                 "--build",
                 "build",
+                "--target",
+                "Build_3rd",
                 "--config",
-                "Release",
+                "${input:build_config}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "presentation": {
                 "echo": true,
                 "reveal": "always",
@@ -143,9 +163,7 @@
                 "panel": "shared",
                 "clear": true
             },
-            "problemMatcher": [
-                "$msCompile"
-            ]
+            "problemMatcher": []
         },
         {
             "label": "_internal_clear_build_dir_windows",
@@ -174,6 +192,10 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "problemMatcher": [],
             "linux": {},
             "osx": {}
@@ -192,7 +214,10 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "presentation": {
                 "echo": true,
                 "reveal": "always",
@@ -202,6 +227,7 @@
             },
             "problemMatcher": []
         },
+        // Clean Build Main Entry
         {
             "label": "Clean Game Build",
             "dependsOn": [
@@ -209,56 +235,6 @@
                 "_internal_clear_build_dir_windows",
                 "_internal_clear_build_dir_linux"
             ],
-            "problemMatcher": []
-        },
-        {
-            "label": "Build 3rd Party (Debug)",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "--build",
-                "build",
-                "--target",
-                "Build_3rd",
-                "--config",
-                "Debug"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "clear": true
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Build 3rd Party (Release)",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "--build",
-                "build",
-                "--target",
-                "Build_3rd",
-                "--config",
-                "Release"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "clear": true
-            },
             "problemMatcher": []
         }
     ]
