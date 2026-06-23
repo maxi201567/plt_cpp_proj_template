@@ -2,14 +2,17 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Create Venv",
+            "label": "_internal_create_venv",
             "type": "shell",
             "command": "if not exist build\\py_temp\\Scripts\\python.exe python -m venv build/py_temp",
+            "hide": true,
             "options": {
                 "cwd": "${workspaceFolder}",
                 "shell": {
                     "executable": "cmd.exe",
-                    "args": ["/c"]
+                    "args": [
+                        "/c"
+                    ]
                 }
             }
         },
@@ -17,19 +20,24 @@
             "label": "Setup",
             "type": "shell",
             "command": "build\\py_temp\\Scripts\\python.exe .vscode\\dependency.py",
-            "dependsOn": ["Create Venv"],
+            "dependsOn": [
+                "_internal_create_venv"
+            ],
             "dependsOrder": "sequence",
             "options": {
                 "cwd": "${workspaceFolder}"
             }
         },
         {
-            "label": "CMake: Configure Game (MSVC)",
+            "label": "_internal_config_proj_msvc",
             "type": "shell",
             "command": "cmake",
+            "hide": true,
             "args": [
-                "-B", "build",
-                "-A", "x64",
+                "-B",
+                "build",
+                "-A",
+                "x64",
                 "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
             ],
             "options": {
@@ -46,12 +54,15 @@
             "problemMatcher": []
         },
         {
-            "label": "CMake: Configure Game (Ninja)",
+            "label": "_internal_config_proj_ninja",
             "type": "shell",
             "command": "cmake",
+            "hide": true,
             "args": [
-                "-B", "build",
-                "-G", "Ninja",
+                "-B",
+                "build",
+                "-G",
+                "Ninja",
                 "-DCMAKE_MAKE_PROGRAM=${workspaceFolder}/3rd/ninja/ninja.exe",
                 "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
             ],
@@ -69,12 +80,29 @@
             "problemMatcher": []
         },
         {
-            "label": "CMake: Build Game (Debug)",
+            "label": "Config Project",
+            "type": "shell",
+            "command": "cmake",
+            "windows": {
+                "dependsOn": [
+                    "_internal_config_proj_msvc"
+                ]
+            },
+            "linux": {
+                "dependsOn": [
+                    "_internal_config_proj_ninja"
+                ]
+            }
+        },
+        {
+            "label": "Build Project (Debug)",
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "build",
-                "--config", "Debug",
+                "--build",
+                "build",
+                "--config",
+                "Debug",
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -95,12 +123,14 @@
             ]
         },
         {
-            "label": "CMake: Build Game (Release)",
+            "label": "Build Project (Release)",
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "build",
-                "--config", "Release",
+                "--build",
+                "build",
+                "--config",
+                "Release",
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -118,9 +148,10 @@
             ]
         },
         {
-            "label": "Delete Build Directory (Windows)",
+            "label": "_internal_clear_build_dir_windows",
             "type": "shell",
             "command": "cmd",
+            "hide": true,
             "args": [
                 "/c",
                 "rmdir /s /q build"
@@ -132,11 +163,13 @@
             "windows": {}
         },
         {
-            "label": "Delete Build Directory (Unix)",
+            "label": "_internal_clear_build_dir_linux",
             "type": "shell",
             "command": "rm",
+            "hide": true,
             "args": [
-                "-rf", "build"
+                "-rf",
+                "build"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -146,12 +179,15 @@
             "osx": {}
         },
         {
-            "label": "CMake: Clean Game Build (cmake)",
+            "label": "_internal_clean_cmake",
             "type": "shell",
             "command": "cmake",
+            "hide": true,
             "args": [
-                "--build", "build",
-                "--target", "clean"
+                "--build",
+                "build",
+                "--target",
+                "clean"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -169,20 +205,23 @@
         {
             "label": "Clean Game Build",
             "dependsOn": [
-                "CMake: Clean Game Build (cmake)",
-                "Delete Build Directory (Windows)",
-                "Delete Build Directory (Unix)"
+                "_internal_clean_cmake",
+                "_internal_clear_build_dir_windows",
+                "_internal_clear_build_dir_linux"
             ],
             "problemMatcher": []
         },
         {
-            "label": "CMake: Build 3rd Party (Debug)",
+            "label": "Build 3rd Party (Debug)",
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "build",
-                "--target", "Build_3rd",
-                "--config", "Debug"
+                "--build",
+                "build",
+                "--target",
+                "Build_3rd",
+                "--config",
+                "Debug"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -198,13 +237,16 @@
             "problemMatcher": []
         },
         {
-            "label": "CMake: Build 3rd Party (Release)",
+            "label": "Build 3rd Party (Release)",
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "build",
-                "--target", "Build_3rd",
-                "--config", "Release"
+                "--build",
+                "build",
+                "--target",
+                "Build_3rd",
+                "--config",
+                "Release"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
