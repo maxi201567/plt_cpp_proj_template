@@ -5,5 +5,10 @@
         "dest": "3rd/mimalloc",
         "ref": "v2.1.2",
         "config_args": "-D MI_BUILD_OBJECT:BOOL=OFF -D MI_BUILD_SHARED:BOOL=OFF -D MI_BUILD_TESTS:BOOL=OFF"
+    },
+    {
+        "type": "http",
+        "url":"https://www.lua.org/ftp/lua-5.5.0.tar.gz",
+        "dest": "3rd/lua"
     }
 ]

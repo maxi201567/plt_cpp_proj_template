@@ -130,18 +130,6 @@ target_include_directories(
     ${PROJECT_NAME}
     PRIVATE
     ${GAME_SOURCE_DIR}/
-    ${THIRD_PARTY_DIR}/tinyGFX/inc
-    ${THIRD_PARTY_DIR}/tinyGFX/3rd/eigen-3.4.0
-    ${THIRD_PARTY_DIR}/stb
-    ${THIRD_PARTY_DIR}/mimalloc/include
-    ${THIRD_PARTY_DIR}/tweeny/include
-    ${THIRD_PARTY_DIR}/cJSON
-    ${THIRD_PARTY_DIR}/lua/lua-5.5.0/src
-    ${THIRD_PARTY_DIR}/tinygltf
-    ${THIRD_PARTY_DIR}/nuklear
-    ${THIRD_PARTY_DIR}/eigen
-    ${THIRD_PARTY_DIR}/recastnavigation/Recast/Include
-    ${THIRD_PARTY_DIR}/recastnavigation/Detour/Include
 )
 target_compile_definitions(
     ${PROJECT_NAME}

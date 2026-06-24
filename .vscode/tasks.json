@@ -47,11 +47,13 @@
                 "cwd": "${workspaceFolder}"
             },
             "windows": {
-                "command": "cmd",
-                "args": [
-                    "/c",
-                    "mkdir source 2>nul & mkdir publish 2>nul"
-                ]
+                "command": "if not exist source mkdir source & if not exist publish mkdir publish",
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": ["/d", "/c"]
+                    }
+                }
             },
             "linux": {
                 "command": "mkdir",
